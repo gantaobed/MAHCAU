@@ -102,15 +102,13 @@ async def history_view():
     rows = cursor.fetchall()
     conn.close()
     
-    # HTML Fragment for SPA integration
-    html = "<h2 class='custom-cursive title-text'>MAHCAU: Study Logs</h2>"
+    html = "<h2 class='custom-cursive title-text' style='color:white; margin-bottom:20px;'>MAHCAU: Study Logs</h2>"
     for r in rows: 
         html += f"<div class='info-card'><b>{r[1]}</b><br><small class='log-meta'>{r[0]} | Risk: <span class='risk-red'>{r[2]}%</span> | Loc: {r[3]:.4f}, {r[4]:.4f}</small></div>"
     return HTMLResponse(content=html)
 
 @app.get("/species-info")
 async def species_info():
-    # HTML Fragment for SPA integration
     html = f"""
     <h2 class='custom-cursive title-text' style='color:#62e8ff;'>{SPECIES_FACTS['name']}</h2>
     <div class='info-card'>
@@ -129,9 +127,7 @@ async def species_info():
     """
     return HTMLResponse(content=html)
 
-# Adjust this path based on your folder structure
 frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
-# Fallback to current dir if frontend doesn't exist
 if not os.path.exists(frontend_path):
     frontend_path = os.path.dirname(__file__)
 
