@@ -1028,19 +1028,37 @@ function switchTab(tabId, btnElement) {
 }
 
 function loadHistory() {
-    fetch('/history-view')
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('view-history').innerHTML = html;
-        }).catch(err => console.error("Error loading history:", err));
+    // Replaced fetch with static HTML for GitHub Pages compatibility
+    const html = `
+    <h2 class='custom-cursive title-text' style='color:white; margin-bottom:20px;'>MAHCAU: Study Logs</h2>
+    <div class='info-card'><b>⛔ ILLEGAL MINING ZONE: Spawning strictly prohibited. Mining Risk: 85%</b><br><small class='log-meta'>2026-08-30 09:09 | Risk: <span class='risk-red'>85%</span> | Loc: 12.3830, 75.5550</small></div>
+    <div class='info-card'><b>⛔ ILLEGAL MINING ZONE: Spawning strictly prohibited. Mining Risk: 85%</b><br><small class='log-meta'>2026-08-30 09:05 | Risk: <span class='risk-red'>85%</span> | Loc: 12.1956, 77.6184</small></div>
+    <div class='info-card'><b>🔴 DOMAIN ERROR: Orange-finned Mahseer (Tor remadeviae) is NOT found here. Restricted to Kaveri basin.</b><br><small class='log-meta'>2026-08-30 08:57 | Risk: <span class='risk-red'>0%</span> | Loc: 16.5153, 80.6160</small></div>
+    <div class='info-card'><b>🟢 PROTECTED SANCTUARY: 0% Mining detected. Verified Spawning Site.</b><br><small class='log-meta'>2026-08-30 08:50 | Risk: <span class='risk-red'>0%</span> | Loc: 12.3830, 75.5550</small></div>
+    `;
+    document.getElementById('view-history').innerHTML = html;
+}
 }
 
 function loadSpecies() {
-    fetch('/species-info')
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('view-species').innerHTML = html;
-        }).catch(err => console.error("Error loading species info:", err));
+    // Replaced fetch with static HTML for GitHub Pages compatibility
+    const html = `
+    <h2 class='custom-cursive title-text' style='color:#62e8ff;'>Orange-finned Mahseer (Tor remadeviae)</h2>
+    <div class='info-card'>
+        <h3 class='custom-cursive' style='color:#ffc21a; font-size:20px; margin-top:0;'>🐟 Characteristics (Wikipedia)</h3>
+        <p style='line-height:1.6;'>Prominent hump originating above the pre-opercle, distinctive kink in the pre-opercule, terminal mouth position, and its bright orange caudal fin.</p>
+    </div>
+    <div class='info-card'>
+        <h3 class='custom-cursive' style='color:#ffc21a; font-size:20px; margin-top:0;'>🌍 Distribution</h3>
+        <p style='line-height:1.6;'><b>Endemic to Kaveri River Basin Only</b>. Restricted to the Kaveri basin. Anglers proclaim it as the 'largest and hardest fighting freshwater fish in the world'.</p>
+    </div>
+    <div class='info-card' style='border-left:4px solid #ff3d61;'>
+        <h3 class='custom-cursive' style='color:#ffc21a; font-size:20px; margin-top:0;'>⚠️ IUCN: Critically Endangered (IUCN)</h3>
+        <p style='line-height:1.6;'><b>Threats:</b> Dams, River Fragmentation, Invasive Species (T. khudree, T. putitora), Sand Mining, Dynamite Fishing</p>
+    </div>
+    <div style='text-align:center; padding: 20px 0; font-size: 11px; color: #555;'>© Developed by Ganta Obed</div>
+    `;
+    document.getElementById('view-species').innerHTML = html;
 }
 
 function executeSearch() {
