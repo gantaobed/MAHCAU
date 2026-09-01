@@ -382,13 +382,19 @@ button:hover{background:#1b6078}
 
 <div class="section">
     <div class="section-title">🌧️ RAINFALL → RISK ENGINE</div>
+    <div class="source-note" style="margin-bottom:12px; color:#8ea4ae;">
+        <b>Data Feeds:</b> India Meteorological Department (IMD), India-WRIS (Water Resources Information System), & State-Level Rain Gauge Networks.
+    </div>
     <div class="rain-box">
         <div><span id="rainNumber" class="rain-number">24</span><small> mm/day</small></div>
-        <div id="rainStatus" class="rain-status warn">🟠 WARNING — HEAVY RAIN</div>
+        <div id="rainStatus" class="rain-status good">🟢 HEAVY — BEST CONDITION</div>
     </div>
     <div style="margin-top:12px"><input id="rainSlider" type="range" min="0" max="80" value="24" oninput="updateRain(this.value)"></div>
     <div class="ideal" style="line-height:1.7">
-        0–4.99 mm → Normal<br>5–20 mm → Moderate<br>20.01–50 mm → Heavy rain<br>&gt;50 mm → Extreme rain
+        🟤 0–4.99 mm/day → ❌ Very Low (Bad for spawning, silt settles)<br>
+        🟡 5–20 mm/day → ⚠️ Moderate (Partial / weak support)<br>
+        🟢 20–50 mm/day → ✅ Heavy (Best condition, triggers migration)<br>
+        🔴 &gt;50 mm/day → 🔴 Extreme (Strong flow, clears beds)
     </div>
 </div>
 
@@ -817,10 +823,22 @@ function updateRain(value){
     value=Number(value);
     document.getElementById("rainNumber").textContent=value;
     const status=document.getElementById("rainStatus");
-    if(value<5){status.textContent="🟢 NORMAL";status.className="rain-status good"}
-    else if(value<=20){status.textContent="🟡 MODERATE RAIN";status.className="rain-status warn"}
-    else if(value<=50){status.textContent="🟠 WARNING — HEAVY RAIN";status.className="rain-status warn"}
-    else{status.textContent="🔴 CRITICAL — EXTREME RAIN";status.className="rain-status bad"}
+    if(value<5){
+        status.textContent="🟤 VERY LOW — BAD FOR SPAWNING";
+        status.className="rain-status bad";
+    }
+    else if(value<=20){
+        status.textContent="🟡 MODERATE — WEAK SUPPORT";
+        status.className="rain-status warn";
+    }
+    else if(value<=50){
+        status.textContent="🟢 HEAVY — BEST CONDITION";
+        status.className="rain-status good";
+    }
+    else{
+        status.textContent="🔴 EXTREME — STRONG FLOW";
+        status.className="rain-status bad";
+    }
 }
 
 /* =====================================================
